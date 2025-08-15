@@ -1,0 +1,42 @@
+# 環境設定ファイル
+.env
+
+# Eclipse の設定ファイル
+/.settings/
+/.project
+/.classpath
+
+# Eclipse のビルドディレクトリ
+/bin/
+/target/
+
+# Eclipse の一時ファイル
+*.log
+
+# Eclipse の特定のバックアップファイル
+*.bak
+*.swp
+
+# ビルド成果物
+/dist
+/build
+
+# Maven 関連のファイル
+/.m2/
+
+# Intellij IDEA の設定ファイル（もし使っている場合）
+.idea/
+
+# Node.js（もし使用している場合）
+node_modules/
+
+# macOS / Windows のシステムファイル
+.DS_Store
+Thumbs.db
+
+# Java のコンパイル後のクラスファイル（一般的には /bin/ や /target/ に格納される）
+*.class
+# ビルドされた JAR ファイル
+*.jar 
+# ビルドされた WAR ファイル
+*.war
