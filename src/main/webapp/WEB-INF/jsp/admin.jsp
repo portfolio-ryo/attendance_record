@@ -25,11 +25,14 @@ button {
 </head>
 <body>
 <h1>管理者画面</h1>
+    <form action="LogoutServlet" method="post">
+        <button type="submit">ログアウト</button>
+    </form>
     <form action="RegisterServlet" method="post">
         <button type="submit" name="action" value="register">新規登録</button>
     </form>
     <form action="RecordListServlet" method="get">
-        <button type="submit" name="action" value="WorkHistory">勤務履歴</button>
+        <button type="submit" name="action" value="WorkHistory">勤務記録</button>
     </form>
 </body>
 </html>

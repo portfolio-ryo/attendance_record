@@ -57,6 +57,7 @@
         管理者として登録</label><br><br>
         
         <button type="submit">登録</button>
+        <button type="button" onclick="history.back()">戻る</button>
     </form>
 </div>
 </body>

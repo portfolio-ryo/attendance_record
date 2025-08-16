@@ -57,7 +57,7 @@
 
     <form action="LoginServlet" method="post">
         <label for="code">ユーザーID：</label>
-        <input type="text" id="usercode" name="usercode" placeholder="例：山田太郎" required><br><br>
+        <input type="text" id="usercode" name="usercode" placeholder="6桁のIDを入力してください" required><br><br>
 
         <label for="password">パスワード：</label>
         <input type="password" id="plainPass" name="plainPass" placeholder="4文字以上にしてください" required minlength="4"><br><br>

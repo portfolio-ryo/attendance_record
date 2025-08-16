@@ -8,15 +8,9 @@
 <style>
     body {
         font-family: sans-serif;
-    }
-    .form-container {
-        width: 300px;
-        margin: 100px auto; 
-        padding: 20px;
-        border: 1px solid #ccc;
-        border-radius: 8px;
-        background-color:#a0d8ef;
-        box-shadow: 2px 2px 10px rgba(0,0,0,0.05);
+        text-align: center;
+	　　padding: 50px;
+        
     }
     .message {
         color: green;

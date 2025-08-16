@@ -20,7 +20,7 @@
 </head>
 <body>
 <h1>勤務記録</h1>
-
+<button type="button" onclick="history.back()">戻る</button>
 <table border="1" cellpadding="5" cellspacing="0">
         <tr>
             <th>ID</th>
