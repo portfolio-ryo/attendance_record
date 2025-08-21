@@ -1,51 +1,32 @@
 package dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import io.github.cdimascio.dotenv.Dotenv;
 import model.User;
+import util.DBUtil;
 
 /**
  * ユーザー登録に関するデータベース操作を行うDAOクラス。
  */
 public class RegisterDAO {
 
-	private String jdbcUrl;
-	private String dbUser;
-	private String dbPass;
-
 	public RegisterDAO() {
-		Dotenv dotenv = Dotenv.configure()
-				.directory("")
-				.load();
-
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
-			throw new IllegalStateException("MySQL JDBC ドライバが見つかりません", e);
-		}
-
-		this.jdbcUrl = "jdbc:mysql://localhost:3306/attendance_record?serverTimezone=Asia/Tokyo";
-		this.dbUser = dotenv.get("DB_USER");
-		this.dbPass = dotenv.get("DB_PASS");
-
-		if (dbUser == null || dbPass == null) {
-			throw new IllegalStateException("環境変数が読み込めませんでした");
-		}
 	}
 
 	/**
 	 * 管理者テーブルから最大のID（ADMIN_CODE）を取得する。
+	 * 
+	 * @return 最大の管理者ID（6桁の文字列）、存在しない場合は null
+     * @throws SQLException データベースアクセスエラーが発生した場合
 	 */
 	public String findMaxAid() throws SQLException {
 
 		String sql = "SELECT MAX(ADMIN_CODE) FROM admin";
 
-		try (Connection conn = DriverManager.getConnection(jdbcUrl, dbUser, dbPass);
+		try (Connection conn = DBUtil.getConnection();
 				PreparedStatement ps = conn.prepareStatement(sql);
 				ResultSet rs = ps.executeQuery()) {
 
@@ -59,12 +40,15 @@ public class RegisterDAO {
 
 	/**
 	 * 従業員テーブルから最大のID（EMPLOYEE_CODE）を取得する。
+	 * 
+	 * @return 最大の従業員ID（6桁の文字列）、存在しない場合は null
+     * @throws SQLException データベースアクセスエラーが発生した場合
 	 */
 	public String findMaxEid() throws SQLException {
 
 		String sql = "SELECT MAX(EMPLOYEE_CODE) FROM employee";
 
-		try (Connection conn = DriverManager.getConnection(jdbcUrl, dbUser, dbPass);
+		try (Connection conn = DBUtil.getConnection();
 				PreparedStatement ps = conn.prepareStatement(sql);
 				ResultSet rs = ps.executeQuery()) {
 
@@ -78,6 +62,10 @@ public class RegisterDAO {
 
 	/**
 	 * ユーザー情報を管理者または従業員テーブルに登録する。
+	 * 
+	 * @param user 登録対象のユーザー情報
+     * @return 登録成功: true、失敗: false
+     * @throws SQLException データベースアクセスエラーが発生した場合
 	 */
 	public boolean insertUser(User user) throws SQLException {
 
@@ -86,7 +74,7 @@ public class RegisterDAO {
 
 		boolean admin = user.getAuthority();
 		if (admin) {
-			try (Connection conn = DriverManager.getConnection(jdbcUrl, dbUser, dbPass);
+			try (Connection conn = DBUtil.getConnection();
 				 PreparedStatement ps = conn.prepareStatement(Asql)) {
 
 				ps.setString(1, user.getCode());
@@ -99,7 +87,7 @@ public class RegisterDAO {
 			}
 		} else {
 
-			try (Connection conn = DriverManager.getConnection(jdbcUrl, dbUser, dbPass);
+			try (Connection conn = DBUtil.getConnection();
 					PreparedStatement ps = conn.prepareStatement(Esql)) {
 
 				ps.setString(1, user.getCode());

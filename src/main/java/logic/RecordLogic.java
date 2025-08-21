@@ -14,15 +14,23 @@ import model.Record;
 public class RecordLogic {
 	
 	/**
-     * 出勤打刻を行う。
+     * 出勤の打刻処理を行う。
+     *
+     * @param usercode 打刻するユーザーのコード
+     * @param timestamp 打刻の日時（通常は現在時刻）
+     * @return 結果メッセージ（例：打刻成功や失敗理由）
      */
 	public String clockIn(String usercode, LocalDateTime timestamp) {
 		AttendanceDAO dao = new AttendanceDAO();
 		return dao.attendance(usercode, timestamp);
 	}
 	
-	 /**
-     * 退勤打刻を行う。
+	/**
+     * 退勤の打刻処理を行う。
+     *
+     * @param usercode 打刻するユーザーのコード
+     * @param timestamp 打刻の日時（通常は現在時刻）
+     * @return 結果メッセージ（例：打刻成功や失敗理由）
      */
 	public String clockOut(String usercode, LocalDateTime timestamp) {
 		AttendanceDAO dao = new AttendanceDAO();
@@ -30,8 +38,11 @@ public class RecordLogic {
 	}
 	
 	/**
-	 * 勤務履歴一覧を表示
-	 */
+     * 全ユーザーの出勤・退勤履歴を取得する。
+     *
+     * @return 勤務記録（Record）のリスト
+     * @throws SQLException データベース接続やクエリの実行に失敗した場合にスローされる
+     */
 	public List<Record> getRecordList() throws SQLException {
         RecordDAO dao = new RecordDAO();
         return dao.findAll();

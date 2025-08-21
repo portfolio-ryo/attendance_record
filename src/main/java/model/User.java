@@ -14,12 +14,27 @@ public class User implements Serializable{
 	
 	public User() {}
 	
+	/**
+     * ユーザー権限、ユーザーコード、ハッシュ化パスワードを指定してユーザーを生成するコンストラクタ。
+     * 
+     * @param authority ユーザーの権限
+     * @param userCode ユーザーコード
+     * @param hashedPass ハッシュ化されたパスワード
+     */
 	public User(Boolean authority, String userCode,String hashedPass) {
 		this.authority=authority;
 		this.userCode=userCode;
 		this.hashedPass=hashedPass;
 	}
 	
+	/**
+     * ユーザー権限、ユーザーコード、ユーザー名、ハッシュ化パスワードを指定してユーザーを生成するコンストラクタ。
+     * 
+     * @param authority ユーザーの権限
+     * @param userCode ユーザーコード
+     * @param name ユーザー名
+     * @param hashedPass ハッシュ化されたパスワード
+     */
 	public User(Boolean authority, String userCode,String name,String hashedPass) {
 		this.authority=authority;
 		this.userCode=userCode;
